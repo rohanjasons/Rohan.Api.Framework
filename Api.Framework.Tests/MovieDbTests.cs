@@ -1,7 +1,7 @@
+using Api.Framework.Tests.Helper;
 using RestSharp;
 using Shouldly;
 using System.Net;
-using System.Text.RegularExpressions;
 using Xunit;
 
 namespace Api.Framework.Tests
@@ -32,7 +32,7 @@ namespace Api.Framework.Tests
             RestResponse.StatusCode.ShouldBe(HttpStatusCode.OK);
 
             var text = RestResponse.Content.Substring(70);
-            string json = $"{{ \"username\": \"{userName}\", \"password\": \"{password}\", \"request_token\": \"{RegexHelper(text)}\" }}";
+            string json = $"{{ \"username\": \"{userName}\", \"password\": \"{password}\", \"request_token\": \"{RegexHelpers.RegexHelper(text)}\" }}";
             string authLoginEndpoint = baseEndpoint + authWLogin;
 
             // validates request token 
@@ -44,7 +44,7 @@ namespace Api.Framework.Tests
 
             RestResponse.StatusCode.ShouldBe(HttpStatusCode.OK);
 
-            string requestToken = $"{{ \"request_token\": \"{RegexHelper(text)}\" }}";
+            string requestToken = $"{{ \"request_token\": \"{RegexHelpers.RegexHelper(text)}\" }}";
             string authEndpoint = baseEndpoint + authSession;
             // requests session id to be used in subsequent requests
             RestRequest = RequestMethodManager.SetRequestMethod(RestRequest, Method.POST, DataFormat.Json);
@@ -59,22 +59,17 @@ namespace Api.Framework.Tests
             string sessionResponse = RestResponse.Content.Substring(28);
 
             var ratingBody = "{ \"value\" : \"8.5\" }";
-            var someTest = RegexHelper(sessionResponse);
+            var someTest = RegexHelpers.RegexHelper(sessionResponse);
             // posts a rating against a movie passing the session id
             RestRequest = RequestMethodManager.SetRequestMethod(RestRequest, Method.POST, DataFormat.Json);
             IRestRequest = HeaderManager.AddRequestHeader(RestRequest, "Content-Type", "application/json;charset=utf-8");
             IRestRequest = ParameterManager.AddRequestQueryParameter(RestRequest, "api_key", apiKey);
-            IRestRequest = ParameterManager.AddRequestQueryParameter(RestRequest, "session_id", RegexHelper(sessionResponse));
+            IRestRequest = ParameterManager.AddRequestQueryParameter(RestRequest, "session_id", RegexHelpers.RegexHelper(sessionResponse));
             IRestRequest = RequestBodyManager.AddJsonRequestToBody(RestRequest, ratingBody);
             RestClient = EndpointManager.SetRequestEndpoint(RestClient, endpoint);
             RestResponse = RequestManager.SendRequestAndGetResponse(RestClient, RestResponse, IRestRequest);
 
             RestResponse.StatusCode.ShouldBe(HttpStatusCode.Created);
-        }
-
-        private string RegexHelper(string value)
-        {
-            return Regex.Replace(value, @"(\s+|@|&|'|\(|\)|<|>|#|{|}|:|;|\"")", "");
         }
 
         [Fact]
