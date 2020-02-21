@@ -1,20 +1,19 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AssemblyName>Api.Framework</AssemblyName>
+    <RootNamespace>Api.Framework</RootNamespace>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <Authors>Rohan Nzenwa Jasons</Authors>
+    <Company>Rohan Nzenwa Jasons</Company>
+    <Description>Lightweight API automation framework. Wrapper around the RestSharp library to be used as an acceleration tool for API testing</Description>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Configuration\ConfigurationFixture.cs" />
-    <Compile Remove="Configuration\Base\ConfigurationFixtureBase.cs" />
-    <Compile Remove="Base\HttpApiBase.cs" />
-    <Compile Remove="Action.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Base\" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="RestSharp" Version="106.10.1" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="RestSharp" Version="106.10.1" />
   </ItemGroup>
+
 </Project>
