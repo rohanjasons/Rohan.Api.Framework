@@ -3,30 +3,30 @@
 namespace Api.Framework
 {
     /// <summary>
-    /// 
+    /// This class is used to add the request body to the RestRequest container to be sent to the API
     /// </summary>
     public static class RequestBodyManager
     {
         /// <summary>
-        /// 
+        /// This method adds the JSON request body to the container that is sent to the API
         /// </summary>
-        /// <param name="RestRequest"></param>
-        /// <param name="requestObject"></param>
-        /// <returns></returns>
-        public static IRestRequest AddJsonRequestToBody(RestRequest RestRequest, object requestObject)
+        /// <param name="restRequest"> Container for data that is sent to API </param>
+        /// <param name="requestObject"> Request object that is sent to the API </param>
+        /// <returns> Container for data that is sent to API </returns>
+        public static IRestRequest AddJsonRequestToBody(RestRequest restRequest, object requestObject)
         {
-            return RestRequest.AddJsonBody(requestObject);
+            return restRequest.AddJsonBody(requestObject);
         }
 
         /// <summary>
-        /// 
+        /// This method adds the XML request body to the container that is sent to the API
         /// </summary>
-        /// <param name="RestRequest"></param>
-        /// <param name="requestObject"></param>
-        /// <returns></returns>
-        public static IRestRequest AddXmlRequestToBody(RestRequest RestRequest, object requestObject)
+        /// <param name="restRequest">  Container for data that is sent to API </param>
+        /// <param name="requestObject"> Request object that is sent to the API </param>
+        /// <returns> Container for data that is sent to API </returns>
+        public static IRestRequest AddXmlRequestToBody(RestRequest restRequest, object requestObject)
         {
-            return RestRequest.AddXmlBody(requestObject);
+            return restRequest.AddXmlBody(requestObject);
         }
     }
 }
