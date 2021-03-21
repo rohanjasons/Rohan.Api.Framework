@@ -1,6 +1,6 @@
 ﻿using RestSharp;
 
-namespace Api.Framework
+namespace Api.Framework.Managers
 {
     /// <summary>
     /// This class is used to add the request body to the RestRequest container to be sent to the API
@@ -13,7 +13,7 @@ namespace Api.Framework
         /// <param name="restRequest"> Container for data that is sent to API </param>
         /// <param name="requestObject"> Request object that is sent to the API </param>
         /// <returns> Container for data that is sent to API </returns>
-        public static IRestRequest AddJsonRequestToBody(RestRequest restRequest, object requestObject)
+        public static IRestRequest AddJsonRequestToBody(this RestRequest restRequest, object requestObject)
         {
             return restRequest.AddJsonBody(requestObject);
         }
@@ -24,7 +24,7 @@ namespace Api.Framework
         /// <param name="restRequest">  Container for data that is sent to API </param>
         /// <param name="requestObject"> Request object that is sent to the API </param>
         /// <returns> Container for data that is sent to API </returns>
-        public static IRestRequest AddXmlRequestToBody(RestRequest restRequest, object requestObject)
+        public static IRestRequest AddXmlRequestToBody(this RestRequest restRequest, object requestObject)
         {
             return restRequest.AddXmlBody(requestObject);
         }
