@@ -1,4 +1,5 @@
-﻿using RestSharp;
+﻿using System;
+using RestSharp;
 
 namespace Api.Framework.Managers
 {
@@ -15,7 +16,15 @@ namespace Api.Framework.Managers
         /// <returns> Container for data that is sent to API </returns>
         public static IRestRequest AddJsonRequestToBody(this RestRequest restRequest, object requestObject)
         {
-            return restRequest.AddJsonBody(requestObject);
+            try
+            {
+                return restRequest.AddJsonBody(requestObject);
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+                throw;
+            }
         }
 
         /// <summary>
@@ -26,7 +35,15 @@ namespace Api.Framework.Managers
         /// <returns> Container for data that is sent to API </returns>
         public static IRestRequest AddXmlRequestToBody(this RestRequest restRequest, object requestObject)
         {
-            return restRequest.AddXmlBody(requestObject);
+            try
+            {
+                return restRequest.AddXmlBody(requestObject);
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+                throw;
+            }
         }
     }
 }
