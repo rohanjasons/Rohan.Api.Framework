@@ -1,4 +1,5 @@
-﻿using RestSharp;
+﻿using System;
+using RestSharp;
 
 namespace Api.Framework.Managers
 {
@@ -14,8 +15,15 @@ namespace Api.Framework.Managers
         /// <returns> Returns a restClient with an endpoint </returns>
         public static RestClient SetRequestEndpoint(this string endpoint)
         {
-            // TODO: Add a try catch
-            return new RestClient(endpoint);
+            try
+            {
+                return new RestClient(endpoint);
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+                throw;
+            }
         }
     }
 }

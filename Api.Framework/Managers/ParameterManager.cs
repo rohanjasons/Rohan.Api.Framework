@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Api.Framework.Context;
 using Newtonsoft.Json;
 using RestSharp;
@@ -75,11 +76,19 @@ namespace Api.Framework.Managers
         /// <returns> Container for data that is sent to API </returns>
         public static IRestRequest AddRequestParameter(this RestRequest restRequest, IEnumerable<RequestParameter> parameters)
         {
-            foreach(var parameter in parameters)
+            try
             {
-                restRequest.AddParameter(parameter.ParameterKey, parameter.ParameterValue, parameter.ParameterType);
+                foreach (var parameter in parameters)
+                {
+                    restRequest.AddParameter(parameter.ParameterKey, parameter.ParameterValue, parameter.ParameterType);
+                }
+                return restRequest;
             }
-            return restRequest; 
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+                throw;
+            }
         }
     }
 }

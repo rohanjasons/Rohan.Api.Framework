@@ -32,8 +32,8 @@ namespace Api.Framework.Tests.Tests
             response.StatusCode.ShouldBe(HttpStatusCode.OK);
 
             var text = response.Content.Substring(70);
-            string json = $"{{ \"username\": \"{UserName}\", \"password\": \"{Password}\", \"request_token\": \"{text.RegexHelper()}\" }}";
-            string authLoginEndpoint = BaseEndpoint + AuthWLogin;
+            var json = $"{{ \"username\": \"{UserName}\", \"password\": \"{Password}\", \"request_token\": \"{text.RegexHelper()}\" }}";
+            var authLoginEndpoint = BaseEndpoint + AuthWLogin;
 
             // validates request token 
             var post = CallManager.TriggerCall(Method.POST, authLoginEndpoint, DataFormat.Json, RequestParameters, json);

@@ -1,4 +1,5 @@
-﻿using RestSharp;
+﻿using System;
+using RestSharp;
 
 namespace Api.Framework.Managers
 {
@@ -17,10 +18,18 @@ namespace Api.Framework.Managers
         /// <returns></returns>
         public static RestRequest SetRequestMethod(this Method method, DataFormat dataFormat)
         {
-            return new RestRequest(method)
+            try
             {
-                RequestFormat = dataFormat
-            };
+                return new RestRequest(method)
+                {
+                    RequestFormat = dataFormat
+                };
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+                throw;
+            }
         }
     }
 }
