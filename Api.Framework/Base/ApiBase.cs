@@ -1,6 +1,6 @@
 ﻿using RestSharp;
 
-namespace Api.Framework
+namespace Api.Framework.Base
 {
     /// <summary>
     /// This is the base class that all API tests will inherit from.
@@ -10,24 +10,24 @@ namespace Api.Framework
         /// <summary>
         ///  Client to translate RestRequests into HTTP requests and process response results
         /// </summary>
-        public static RestClient RestClient;
+        protected static RestClient RestClient;
 
         /// <summary>
         /// Container for the data sent to the API
         /// </summary>
-        public static RestRequest RestRequest;
+        protected static RestRequest RestRequest;
         
         /// <summary>
         /// Interface for the container for the data sent to the API
         /// Contains the Endpoint, Headers, Body etc
         /// </summary>
-        public static IRestRequest IRestRequest;
+        protected static IRestRequest IRestRequest;
 
         /// <summary>
         /// Container for the data sent back from the API
         /// Contains the response status code, response content etc
         /// </summary>
-        public static IRestResponse RestResponse;
+        protected static IRestResponse RestResponse;
 
         /// <summary>
         /// Constructor used to initialise the API base
@@ -36,7 +36,7 @@ namespace Api.Framework
         /// <param name="restRequest"> Container for the data sent to the API </param>
         /// <param name="iRestRequest"> Interface for the container for the data sent to the API </param>
         /// <param name="restResponse"> Container for the data sent back from the API </param>
-        public ApiBase(RestClient restClient, RestRequest restRequest, IRestRequest iRestRequest, IRestResponse restResponse)
+        protected ApiBase(RestClient restClient, RestRequest restRequest, IRestRequest iRestRequest, IRestResponse restResponse)
         {
             RestClient = restClient;
             RestRequest = restRequest;
@@ -47,6 +47,6 @@ namespace Api.Framework
         /// <summary>
         /// Empty constructor
         /// </summary>
-        public ApiBase() { }
+        protected ApiBase() { }
     }
 }
